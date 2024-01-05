@@ -928,6 +928,10 @@ impl<'a> HwParams<'a> {
         acheck!(snd_pcm_hw_params_set_buffer_size((self.1).0, self.0, v as alsa::snd_pcm_uframes_t)).map(|_| ())
     }
 
+    pub fn test_buffer_size(&self, v: Frames) -> Result<()> {
+        acheck!(snd_pcm_hw_params_test_buffer_size((self.1).0, self.0, v as alsa::snd_pcm_uframes_t)).map(|_| ())
+    }
+
     pub fn set_buffer_time_near(&self, v: u32, dir: ValueOr) -> Result<u32> {
         let mut d = dir as c_int;
         let mut r = v as c_uint;
